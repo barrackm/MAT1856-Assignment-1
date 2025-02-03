@@ -2,8 +2,10 @@ import numpy as np
 
 
 def get_RV_matrix(times, rates, price_dates, maturities):
+    # Create matrix with proper shape
     RV_matrix = np.zeros((len(maturities), len(price_dates) - 1))
 
+    # Populate matric with log-rates
     for i, m in enumerate(maturities):
         for j, date in enumerate(price_dates[:-1]):
             times_j = times[date]
@@ -19,5 +21,6 @@ def get_RV_matrix(times, rates, price_dates, maturities):
     return RV_matrix
 
 def get_covariance_matrix(times, rates, price_dates, maturities):
+    # Create matrix of RVs and return covariance matrix
     RV_matrix = get_RV_matrix(times, rates, price_dates, maturities)
     return np.cov(RV_matrix)

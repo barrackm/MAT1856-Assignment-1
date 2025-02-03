@@ -15,11 +15,15 @@ def get_forward_rates(spot_times, spot_rates, price_dates, resolution=10):
         # Forward rates and times from 1-1 through 1-4
         T = [3 * i / (resolution - 1) + 2 for i in range(resolution)]
         f = np.zeros(resolution)
+
         # Use builtin numpy function to interpolate S_1 from the spot rates
         S_1 = np.interp(1, times, rates)
 
+        # Calculate S_1T using interpolation
         for i in range(resolution):
             S_1T = np.interp(T[i], times, rates)
+
+            # Calculate forward rate
             f[i] = (S_1T * T[i] - S_1) / (T[i] - 1)
 
         all_times[date] =  T

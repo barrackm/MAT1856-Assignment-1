@@ -39,8 +39,6 @@ maturities = [i + 1 for i in range(5)]
 # Get ytm covariance matrix
 ytm_cov = get_covariance_matrix(ytm_t, ytm_r, price_dates, maturities)
 
-
-
 # Get eigenvalues and eigenvectors
 eigenvalues, eigenvectors = np.linalg.eig(ytm_cov)
 
